@@ -5,7 +5,11 @@
 <main>
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <?php foreach($notes as $note) : ?>
-            <li><?= $note['body'] ?></li>
+            <li>
+                <a href="/demo/note?id=<?= $note['id'] ?>" class="hover:underline text-blue-500">
+                    <?= $note['body'] ?>
+                </a>
+            </li>
         <?php endforeach ?>
     </div>
 </main>

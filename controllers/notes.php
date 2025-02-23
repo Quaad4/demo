@@ -6,8 +6,7 @@ $config = require('config.php');
 
 $db = new Database($config['database']);
 
-// $id = $_GET['id'];
-$query = "select * from notes";
+$query = "select * from notes where user_id = 3";
 
 $notes = $db->query($query)->fetchAll();
 
