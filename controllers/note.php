@@ -15,7 +15,7 @@ if(!$note) {
 }
 
 if($note['user_id'] !== $_GET['user_id']) {
-    abort(403);
+    abort(Response::FORBIDDEN);
 }
 
 require 'views/note.view.php';
