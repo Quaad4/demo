@@ -10,4 +10,12 @@ $query = "select * from notes where id = ?";
 
 $note = $db->query($query, [$_GET['id']])->fetch();
 
+if(!$note) {
+    abort();
+}
+
+if($note['user_id'] !== $_GET['user_id']) {
+    abort(403);
+}
+
 require 'views/note.view.php';
