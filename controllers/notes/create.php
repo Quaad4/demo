@@ -1,6 +1,6 @@
 <?php
 
-require 'Validator.php';
+require (__DIR__ . '/../Validator.php');
 
 $heading = 'Create A Note';
 
@@ -22,4 +22,4 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-require 'views/note-create.view.php';
+require 'views/notes/create.view.php';
