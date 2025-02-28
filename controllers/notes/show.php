@@ -5,7 +5,7 @@ use core\Database;
 $config = require(base_path('config.php'));
 $db = new Database($config['database']);
 
-$user_id = 1;
+$user_id = 2;
 
 // Deleting
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit();
 
 } else {
-    $user_id = 1;
+    $user_id = 2;
 
     $query = "select * from notes where id = ?";
 

@@ -1,25 +1,41 @@
 <?php
 
-use core\Response;
+namespace core;
 
-$routes = require(base_path('routes.php'));
+class Router {
+    protected $routes = [];
 
-function routeToController($uri, $routes) {
-    if(array_key_exists($uri, $routes)) {
-        require base_path($routes[$uri]);
-    } else {
+    public function add($uri, $controller, $method) {
+        $this->routes[] = compact('uri', 'controller', 'method');
+    }
+
+    public function get($uri, $controller) {
+        $this->add($uri, $controller, 'GET');
+    }
+
+    public function post($uri, $controller) {
+        $this->add($uri, $controller, 'POST');
+    }
+
+    public function delete($uri, $controller) {
+        $this->add($uri, $controller, 'DELETE');
+    }
+
+    public function put($uri, $controller) {
+        $this->add($uri, $controller, 'PUT');
+    }
+
+    public function patch($uri, $controller) {
+        $this->add($uri, $controller, 'PATCH');
+    }
+
+    public function route($uri, $method) {
+        foreach($this->routes as $route) {
+            if($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
+                return require base_path($route['controller']);
+            }
+        }
+
         abort();
     }
 }
-
-function abort($code = Response::NOT_FOUND) {
-    http_response_code($code);
-
-    require(base_path("views/{$code}.php"));
-
-    die();
-}
-
-$uri = parse_url($_SERVER['REQUEST_URI'])['path'];
-
-routeToController($uri, $routes);
