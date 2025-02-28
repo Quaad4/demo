@@ -2,39 +2,18 @@
 
 use core\Database;
 
+$user_id = 1;
+
 $config = require(base_path('config.php'));
 $db = new Database($config['database']);
 
-$user_id = 1;
+$note = $db->query('select * from notes where id = ?', [
+    $_GET['id']
+])->findOrFail();
 
-// Deleting
-if($_SERVER['REQUEST_METHOD'] == 'POST') {
+authorize($note['user_id'] == $user_id);
 
-    $query = "select * from notes where id = :id";
-    $note = $db->query($query, [
-        'id' => $_POST['id']
-    ])->findOrFail();
-    
-    authorize($note['user_id'] == $user_id);
-
-    $db->query('delete from notes WHERE id = :id', [
-        'id' => $_POST['id']
-    ]);
-
-    header('location: /notes');
-    exit();
-
-} else {
-    $user_id = 1;
-
-    $query = "select * from notes where id = ?";
-
-    $note = $db->query($query, [$_GET['id']])->findOrFail();
-    
-    authorize($note['user_id'] == $user_id);
-    
-    view('notes/show.view.php', [
-        'heading' => 'Note',
-        'note' => $note
-    ]);
-}
+view('notes/show.view.php', [
+    'heading' => 'Note',
+    'note' => $note
+]);
