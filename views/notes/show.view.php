@@ -11,11 +11,11 @@
             <?= htmlspecialchars($note['body']) ?>
         </p>
 
-        <form method="POST" class="mt-6" action="notes">
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="hidden" name="id" value="<?= $note['id'] ?>">
-            <button type="submit" class="text-sm text-red-500 font-bold">Delete</button>
-        </form>
+        <a href="/notes/edit?id=<?= $note['id'] ?>">
+            <button class="mt-6 cursor-pointer rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                Edit
+            </button>
+        </a>
     </div>
 </main>
 
