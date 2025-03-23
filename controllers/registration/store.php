@@ -41,9 +41,7 @@ $db->query('INSERT INTO users (email, password) VALUES (?, ?)',[
     password_hash($password, PASSWORD_DEFAULT)
 ]);
 
-$_SESSION['user'] = [
-    'email' => $email
-];
+login(['email' => $email]);
 
 header('location: /');
 die();

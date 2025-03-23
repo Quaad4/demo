@@ -37,3 +37,22 @@ function view($path, $attributes = []) {
     
     require base_path('views/' . $path);
 }
+
+function login($user) {
+    $_SESSION['user'] = [
+        'email' => $user['email']
+    ];
+
+    session_regenerate_id(true);
+}
+
+function logout() {
+    //logging the user out 
+    // deleting all info in the sessions
+    $_SESSION = [];
+    session_destroy();
+
+    // destroying the cookie
+    $params = session_get_cookie_params();
+    setcookie('PHPSESSID', '', time() - 3600, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
+}
