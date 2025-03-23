@@ -30,7 +30,7 @@ $user = $db->query('SELECT * FROM users WHERE email = ?', [
 ])->find();
 
 if($user) {
-    if(password_verify($user['password'], $password)) {
+    if(password_verify($password, $user['password'])) {
         login([
             'email' => $email
         ]);
