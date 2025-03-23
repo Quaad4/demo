@@ -1,4 +1,8 @@
 <?php
 
-    dd('destroy');
+logout();
+
+header('location: /');
+exit();
+
 ?>
